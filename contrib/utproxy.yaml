@@ -1,0 +1,29 @@
+listen: 0.0.0.0:3500
+#sslcert: /etc/letsencrypt/live/example.com/cert.pem
+#sslkey: /etc/letsencrypt/live/example.com/privkey.pem
+log: /var/log/utproxy.log
+
+services:
+  intranet:
+    type: http
+    endpoint: http://192.168.0.10
+    status: 200
+  database:
+    type: mysql
+    endpoint: localhost:3306
+    user: secretuser
+    pass: secretpass
+  smtp:
+    type: tcp
+    endpoint: localhost:25
+  printer:
+    # disabled: true
+    type: exec
+    command: ping
+    args:
+      - "-c"
+      - "1"
+      - "-W"
+      - "2"
+      - "-q"
+      - "192.168.0.200"

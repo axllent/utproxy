@@ -1,0 +1,9 @@
+/var/log/utproxy.log {
+	daily
+	missingok
+	rotate 7
+	compress
+	delaycompress
+	# Make sure the file isn't moved, but copied
+	copytruncate
+}

@@ -1,0 +1,19 @@
+[Unit]
+Description=utproxy service
+
+[Service]
+ExecStart=/usr/local/bin/utproxy listen
+Restart=always
+# Restart service after 10 seconds if node service crashes
+RestartSec=10
+# Output to syslog
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=utproxy
+## Note: if you're using letsencript then you may need to run as root
+## given the letsencrypt folder permissions
+#User=nobody
+#Group=nogroup
+
+[Install]
+WantedBy=multi-user.target
