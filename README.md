@@ -18,7 +18,7 @@ listen: 0.0.0.0:3500                                    # interface and port to 
 #log: /var/log/utproxy.log                              # log file (optional)
 ```
 
-If both `sslcert` and `sslkey` are set, then UTProxy should be accessed via `https://`, otherwise `http://`. Inn this example we would be accessing the proxy via `http://example.com:3500`. UTProxy does not register or renew SSL certificates, so the service should be restarted manually if you update the certificates.
+If both `sslcert` and `sslkey` are set, then UTProxy should be accessed via `https://`, otherwise `http://`. In this example we would be accessing the proxy via `http://example.com:3500`. UTProxy does not register or renew SSL certificates, so the service should be restarted manually if you update the certificates.
 
 And then secondly the services you wish to test. Each service is added as a array to the `services:` section.
 
@@ -27,11 +27,11 @@ services:
   # an array of services to test, see below
 ```
 
-Each service must contain a unique "check key" (only a-z0-9 and - characters allowed), which will correspond to the URL on our UTProxy for the uptime monitor, eg: `http://example.com:3500/intranet`, `http://example.com:3500/smtp` etc.
+Each service must contain a unique "check key", which will correspond to the URL on our UTProxy for the uptime monitor, eg: `http://example.com:3500/intranet`, `http://example.com:3500/smtp` etc. You can also use keys such as `web/service1` which would translate to `http://example.com:3500/web/service1`.
 
 Checks can be set up with one of the following types:
 
-### `http`
+### Check type `http`
 
 A check for a HTTP response.
 
@@ -44,7 +44,7 @@ services:
     method: HEAD                    # request type (HEAD, GET, POST), default HEAD
 ```
 
-### `tcp`
+### Check type `tcp`
 
 A check for a TCP connection.
 
@@ -55,7 +55,7 @@ services:
     endpoint: localhost:25          # check <destination>:<port>
 ```
 
-### `mysql`
+### Check type `mysql`
 
 A check for a MySQL connection.
 
@@ -68,7 +68,7 @@ services:
     pass: secretpass                # MySQL password 
 ```
 
-### `exec`
+### Check type `exec`
 
 A check to run a command. The command should exit with a `0` status (success).
 
