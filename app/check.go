@@ -7,6 +7,7 @@ import (
 	"github.com/axllent/utproxy/checks/exec"
 	"github.com/axllent/utproxy/checks/http"
 	"github.com/axllent/utproxy/checks/mysql"
+	"github.com/axllent/utproxy/checks/ping"
 	"github.com/axllent/utproxy/checks/tcp"
 	"github.com/patrickmn/go-cache"
 	"github.com/spf13/viper"
@@ -69,6 +70,8 @@ func testCheck(test string) error {
 		return exec.Check(model)
 	case "mysql":
 		return mysql.Check(model)
+	case "ping":
+		return ping.Check(model)
 	default:
 		return fmt.Errorf("unknown")
 	}

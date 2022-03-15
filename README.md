@@ -2,7 +2,7 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/axllent/utproxy)](https://goreportcard.com/report/github.com/axllent/utproxy)
 
-UTProxy is a HTTP(S) proxy service for uptime monitors to access internal services without having to directly expose those services to the internet. It provides different internal checks (HTTP, TCP, MySQL or a command) and returns a HTTP response and status to the uptime monitor.
+UTProxy is a HTTP(S) proxy service for uptime monitors to access internal services without having to directly expose those services to the internet. It provides different internal checks (HTTP, TCP, MySQL, ping or a command) and returns a HTTP response and status to the uptime monitor.
 
 
 ## Configuration
@@ -30,6 +30,7 @@ services:
 Each service must contain a unique "check key", which will correspond to the URL on our UTProxy for the uptime monitor, eg: `http://example.com:3500/intranet`, `http://example.com:3500/smtp` etc. You can also use keys such as `web/service1` which would translate to `http://example.com:3500/web/service1`.
 
 Checks can be set up with one of the following types:
+
 
 ### Check type `http`
 
@@ -68,11 +69,23 @@ services:
     pass: secretpass                # MySQL password 
 ```
 
+### Check type `ping`
+
+A ping test.
+
+```yaml
+services:
+  database:                         # check key
+    type: ping                      # check type
+    endpoint: 192.168.0.100         # host or ip 
+```
+
+
 ### Check type `exec`
 
 A check to run a command. The command should exit with a `0` status (success).
 
-The following example is how to ping an internal machine:
+The following example is how to ping an internal machine using the native ping:
 
 ```yaml
 services:
