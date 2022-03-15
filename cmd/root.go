@@ -10,8 +10,10 @@ import (
 )
 
 var (
+	// Config file
 	cfgFile string
-	// Application version
+
+	// Version of the app
 	Version = "dev"
 )
 
