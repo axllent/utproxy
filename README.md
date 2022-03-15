@@ -71,11 +71,11 @@ services:
 
 ### Check type `ping`
 
-A ping test.
+This will send a single ping to a given host with a 1-second timeout.
 
 ```yaml
 services:
-  database:                         # check key
+  modem:                            # check key
     type: ping                      # check type
     endpoint: 192.168.0.100         # host or ip 
 ```
