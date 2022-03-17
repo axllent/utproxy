@@ -52,6 +52,8 @@ func httpResponse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "text/plain")
+
 	err := Check(req)
 	if err != nil {
 		w.WriteHeader(503)
