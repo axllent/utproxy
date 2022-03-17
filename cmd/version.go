@@ -51,5 +51,7 @@ func updateApp() error {
 		return err
 	}
 	fmt.Printf("Updated %s to version %s\n", os.Args[0], rel)
+
+	fmt.Println("Remember to restart your application.")
 	return nil
 }
