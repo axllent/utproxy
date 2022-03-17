@@ -2,7 +2,7 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/axllent/utproxy)](https://goreportcard.com/report/github.com/axllent/utproxy)
 
-UTProxy is a HTTP(S) proxy service for uptime monitors to access internal services without having to directly expose those services to the internet. It provides different internal checks (HTTP, TCP, MySQL, ping or a command) and returns a HTTP response and status to the uptime monitor.
+UTProxy is a HTTP(S) proxy service for uptime monitors to access internal services without having to directly expose those services to the internet. It provides different internal checks (HTTP, TCP, MySQL, ping or a command) and returns a HTTP response and status to the uptime monitor. It has built-in flood protection (ie: multiple monitoring services) to cache successful requests for 55 seconds, and error responses for 25 seconds.
 
 
 ## Configuration
