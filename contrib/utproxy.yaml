@@ -16,6 +16,9 @@ services:
   smtp:
     type: tcp
     endpoint: localhost:25
+  modem:
+    type: ping
+    endpoint: 192.168.0.1
   printer:
     # disabled: true
     type: exec
