@@ -69,7 +69,7 @@ func httpResponse(w http.ResponseWriter, r *http.Request) {
 func writeLog(r *http.Request, status int) {
 
 	if LogRequestsTo == "" {
-		fmt.Println("no log")
+		// logging disabled
 		return
 	}
 
@@ -84,6 +84,8 @@ func writeLog(r *http.Request, status int) {
 	if err != nil {
 		ip = r.RemoteAddr
 	}
+
+	ip = fmt.Sprintf("%-15v", ip)
 
 	l := fmt.Sprintf("%s [%s] \"%s %s\" %d \"%s\"\n", ip, ts, r.Method, r.URL.Path, status, r.UserAgent())
 
