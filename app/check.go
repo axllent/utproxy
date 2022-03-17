@@ -14,12 +14,12 @@ import (
 )
 
 var (
-	tmpCache = cache.New(60*time.Second, time.Minute)
+	tmpCache = cache.New(55*time.Second, time.Minute)
 )
 
 // Check global function
 // Caches responses to reduce load from multiple checkers.
-// Success responses are cached for 60 seconds, failures 30 seconds.
+// Success responses are cached for 55 seconds, failures 25 seconds.
 func Check(test string) error {
 	cached, found := tmpCache.Get(test)
 	if found {
@@ -33,8 +33,8 @@ func Check(test string) error {
 
 	cacheFor := cache.DefaultExpiration
 	if err != nil {
-		// reduce cache to 30s for errors
-		cacheFor = 30 * time.Second
+		// reduce cache for errors
+		cacheFor = 25 * time.Second
 	}
 
 	tmpCache.Set(test, err, cacheFor)
