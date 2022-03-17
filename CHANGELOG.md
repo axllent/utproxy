@@ -1,5 +1,10 @@
 # Changelog
 
+## [dev]
+
+- Hide help & completion commands
+
+
 ## [1.0.2]
 
 - Pad IP addresses in the log files for easier reading
