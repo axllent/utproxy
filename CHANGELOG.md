@@ -1,8 +1,10 @@
 # Changelog
 
-## [dev]
+## [1.0.3]
 
 - Hide help & completion commands
+- Update Go mods
+- Update Github actions
 
 
 ## [1.0.2]
