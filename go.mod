@@ -5,7 +5,7 @@ go 1.15
 require (
 	github.com/axllent/semver v0.0.1
 	github.com/go-ping/ping v0.0.0-20211130115550-779d1e919534
-	github.com/go-sql-driver/mysql v1.6.0
+	github.com/go-sql-driver/mysql v1.7.1
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible
