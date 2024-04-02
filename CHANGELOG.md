@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.4]
+
+- Update Go modules
+- Update GitHub workflows
+
+
 ## [1.0.3]
 
 - Hide help & completion commands
