@@ -12,10 +12,10 @@ You have to set up a configuration file, see [`contrib/utproxy.yaml`](contrib/ut
 The configuration has two main sections, firstly the service configuration:
 
 ```yaml
-listen: 0.0.0.0:3500                                    # interface and port to listen on
-#sslcert: /etc/letsencrypt/live/example.com/cert.pem    # SSL certificate (optional)
-#sslkey: /etc/letsencrypt/live/example.com/privkey.pem  # SSL key (optional)
-#log: /var/log/utproxy.log                              # log file (optional)
+listen: 0.0.0.0:3500                                      # interface and port to listen on
+#sslcert: /etc/letsencrypt/live/example.com/fullchain.pem # SSL certificate (optional)
+#sslkey: /etc/letsencrypt/live/example.com/privkey.pem    # SSL key (optional)
+#log: /var/log/utproxy.log                                # log file (optional)
 ```
 
 If both `sslcert` and `sslkey` are set, then UTProxy should be accessed via `https://`, otherwise `http://`. In this example we would be accessing the proxy via `http://example.com:3500`. UTProxy does not register or renew SSL certificates, so the service should be restarted manually if you update the certificates.
