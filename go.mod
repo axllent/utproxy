@@ -8,5 +8,5 @@ require (
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/spf13/cobra v1.8.1
-	github.com/spf13/viper v1.18.2
+	github.com/spf13/viper v1.19.0
 )
