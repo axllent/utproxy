@@ -1,3 +1,4 @@
+// Package app contains the application logic
 package app
 
 import (

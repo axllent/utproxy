@@ -22,7 +22,7 @@ func Check(v *viper.Viper) error {
 	ep := v.GetString("Endpoint")
 
 	if ep == "" {
-		return errors.New("No endpoint set")
+		return errors.New("no endpoint set")
 	}
 
 	pinger, err := ping.NewPinger(ep)

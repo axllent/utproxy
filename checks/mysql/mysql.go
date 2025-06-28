@@ -19,7 +19,7 @@ func Check(v *viper.Viper) error {
 	pass := v.GetString("Pass")
 
 	if ep == "" {
-		return errors.New("No endpoint set")
+		return errors.New("no endpoint set")
 	}
 
 	connString := fmt.Sprintf("%s:%s@tcp(%s)/", user, pass, ep)
@@ -29,7 +29,7 @@ func Check(v *viper.Viper) error {
 		return err
 	}
 
-	defer db.Close()
+	defer func() { _ = db.Close() }()
 
 	// make sure connection is available
 	if err := db.Ping(); err != nil {
