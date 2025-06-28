@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/go-ping/ping"
+	probing "github.com/prometheus-community/pro-bing"
 	"github.com/spf13/viper"
 )
 
@@ -25,7 +25,7 @@ func Check(v *viper.Viper) error {
 		return errors.New("no endpoint set")
 	}
 
-	pinger, err := ping.NewPinger(ep)
+	pinger, err := probing.NewPinger(ep)
 	if err != nil {
 		return err
 	}
