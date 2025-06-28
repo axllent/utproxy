@@ -16,7 +16,7 @@ import (
 )
 
 var (
-	// LogRequestsTo variable - if set then logfile is written
+	// LogRequestsTo variable - if set then this log file is written to
 	LogRequestsTo string
 
 	m sync.Mutex
@@ -47,7 +47,7 @@ func StartServer() {
 func httpResponse(w http.ResponseWriter, r *http.Request) {
 	req := r.URL.Path[1:]
 	if req == "" || req == "favicon.ico" || !viper.Sub("Services").IsSet(req) {
-		fourOfour(w)
+		pageMissing(w)
 		writeLog(r, 404)
 		return
 	}
@@ -57,12 +57,12 @@ func httpResponse(w http.ResponseWriter, r *http.Request) {
 	err := Check(req)
 	if err != nil {
 		w.WriteHeader(503)
-		fmt.Fprint(w, err)
+		_, _ = fmt.Fprint(w, err)
 		writeLog(r, 503)
 		return
 	}
 
-	fmt.Fprintf(w, "ok")
+	_, _ = fmt.Fprintf(w, "ok")
 	writeLog(r, 200)
 }
 
@@ -95,7 +95,7 @@ func writeLog(r *http.Request, status int) {
 		return
 	}
 
-	defer f.Close()
+	defer func() { _ = f.Close() }()
 
 	if _, err = f.WriteString(l); err != nil {
 		log.Println(err)
@@ -103,7 +103,7 @@ func writeLog(r *http.Request, status int) {
 
 }
 
-func fourOfour(w http.ResponseWriter) {
+func pageMissing(w http.ResponseWriter) {
 	template := `<!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -115,8 +115,8 @@ Not found
 </body>
 </html>	
 `
-	// w.WriteHeader(http.StatusNotFound)
-	fmt.Fprint(w, template)
+	w.WriteHeader(http.StatusNotFound)
+	_, _ = fmt.Fprint(w, template)
 }
 
 type gzipResponseWriter struct {
@@ -137,7 +137,7 @@ func makeGzipHandler(fn http.HandlerFunc) http.HandlerFunc {
 		}
 		w.Header().Set("Content-Encoding", "gzip")
 		gz := gzip.NewWriter(w)
-		defer gz.Close()
+		defer func() { _ = gz.Close() }()
 		gzr := gzipResponseWriter{Writer: gz, ResponseWriter: w}
 		fn(gzr, r)
 	}

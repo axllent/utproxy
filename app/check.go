@@ -1,3 +1,4 @@
+// Package app contains the application logic
 package app
 
 import (
@@ -59,9 +60,9 @@ func testCheck(test string) error {
 		return fmt.Errorf("disabled")
 	}
 
-	mtype := model.GetString("Type")
+	testType := model.GetString("Type")
 
-	switch mtype {
+	switch testType {
 	case "http":
 		return http.Check(model)
 	case "tcp":

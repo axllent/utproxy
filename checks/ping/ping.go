@@ -3,18 +3,12 @@ package ping
 import (
 	"errors"
 	"fmt"
-	"net"
 	"runtime"
 	"time"
 
-	"github.com/go-ping/ping"
+	probing "github.com/prometheus-community/pro-bing"
 	"github.com/spf13/viper"
 )
-
-type response struct {
-	addr *net.IPAddr
-	rtt  time.Duration
-}
 
 // Check returns a test
 func Check(v *viper.Viper) error {
@@ -22,15 +16,15 @@ func Check(v *viper.Viper) error {
 	ep := v.GetString("Endpoint")
 
 	if ep == "" {
-		return errors.New("No endpoint set")
+		return errors.New("no endpoint set")
 	}
 
-	pinger, err := ping.NewPinger(ep)
+	pinger, err := probing.NewPinger(ep)
 	if err != nil {
 		return err
 	}
 
-	// required for Windows
+	// Required for Windows compatibility
 	if runtime.GOOS == "windows" {
 		pinger.SetPrivileged(true)
 	}
@@ -38,8 +32,8 @@ func Check(v *viper.Viper) error {
 	pinger.Count = 1
 	pinger.Timeout = time.Second
 
-	err = pinger.Run() // Blocks until finished.
-	if err != nil {
+	// Blocks until finished.
+	if err := pinger.Run(); err != nil {
 		return err
 	}
 

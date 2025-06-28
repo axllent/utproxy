@@ -7,8 +7,8 @@ Restart=always
 # Restart service after 10 seconds if node service crashes
 RestartSec=10
 # Output to syslog
-StandardOutput=syslog
-StandardError=syslog
+StandardOutput=journal
+StandardError=journal
 SyslogIdentifier=utproxy
 ## Note: if you're using letsencript then you may need to run as root
 ## given the letsencrypt folder permissions
