@@ -1,3 +1,4 @@
+// Package cmd is the main application
 package cmd
 
 import (
@@ -15,12 +16,6 @@ var (
 
 	// Version of the app
 	Version = "dev"
-
-	// Repo on Github for updater
-	Repo = "axllent/utproxy"
-
-	// RepoBinaryName on Github for updater
-	RepoBinaryName = "utproxy"
 )
 
 // rootCmd represents the base command when called without any subcommands
