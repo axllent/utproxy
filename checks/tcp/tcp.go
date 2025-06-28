@@ -1,3 +1,4 @@
+// Package tcp provides a TCP check for checking the status of a TCP connection
 package tcp
 
 import (

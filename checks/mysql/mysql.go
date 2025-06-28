@@ -1,3 +1,4 @@
+// Package mysql provides a MySQL check for checking the status of a MySQL database connection
 package mysql
 
 import (

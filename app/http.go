@@ -115,8 +115,8 @@ Not found
 </body>
 </html>	
 `
-	// w.WriteHeader(http.StatusNotFound)
-	fmt.Fprint(w, template)
+	w.WriteHeader(http.StatusNotFound)
+	_, _ = fmt.Fprint(w, template)
 }
 
 type gzipResponseWriter struct {

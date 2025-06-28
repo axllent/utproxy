@@ -1,3 +1,4 @@
+// Package exec provides an execution check for running commands
 package exec
 
 import (

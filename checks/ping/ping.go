@@ -3,18 +3,12 @@ package ping
 import (
 	"errors"
 	"fmt"
-	"net"
 	"runtime"
 	"time"
 
 	probing "github.com/prometheus-community/pro-bing"
 	"github.com/spf13/viper"
 )
-
-type response struct {
-	addr *net.IPAddr
-	rtt  time.Duration
-}
 
 // Check returns a test
 func Check(v *viper.Viper) error {

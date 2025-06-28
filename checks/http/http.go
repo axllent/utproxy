@@ -1,3 +1,4 @@
+// Package http provides an HTTP check for checking the status of a web endpoint
 package http
 
 import (
