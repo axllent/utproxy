@@ -1,3 +1,4 @@
+// Package tcp provides a TCP check for checking the status of a TCP connection
 package tcp
 
 import (
@@ -14,7 +15,7 @@ func Check(v *viper.Viper) error {
 	ep := v.GetString("Endpoint")
 
 	if ep == "" {
-		return errors.New("No endpoint set")
+		return errors.New("no endpoint set")
 	}
 
 	timeout := time.Second
@@ -25,8 +26,7 @@ func Check(v *viper.Viper) error {
 
 	conn, err := dialer()
 	if err == nil {
-		conn.Close()
-		return nil
+		return conn.Close()
 	}
 
 	return err

@@ -1,3 +1,4 @@
+// Package http provides an HTTP check for checking the status of a web endpoint
 package http
 
 import (
@@ -22,7 +23,7 @@ func Check(v *viper.Viper) error {
 	url := v.GetString("Endpoint")
 
 	if url == "" {
-		return errors.New("No endpoint set")
+		return errors.New("no endpoint set")
 	}
 
 	method := strings.ToUpper(v.GetString("Method"))
@@ -50,7 +51,7 @@ func Check(v *viper.Viper) error {
 	}
 
 	if resp.StatusCode != expectedCode {
-		return fmt.Errorf("Expected status %d, received %d", expectedCode, resp.StatusCode)
+		return fmt.Errorf("expected status %d, received %d", expectedCode, resp.StatusCode)
 	}
 
 	return nil

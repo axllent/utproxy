@@ -1,3 +1,4 @@
+// Package exec provides an execution check for running commands
 package exec
 
 import (
@@ -16,7 +17,7 @@ func Check(v *viper.Viper) error {
 	command := v.GetString("Command")
 
 	if command == "" {
-		return errors.New("No command set")
+		return errors.New("no command set")
 	}
 
 	args := v.GetStringSlice("Args")
@@ -28,7 +29,7 @@ func Check(v *viper.Viper) error {
 	output, err := cmd.CombinedOutput()
 
 	if err != nil {
-		return fmt.Errorf("Error: %s\nOutput: %s", err.Error(), string(output))
+		return fmt.Errorf("error: %s\noutput: %s", err.Error(), string(output))
 	}
 
 	return nil

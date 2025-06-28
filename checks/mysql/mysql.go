@@ -1,3 +1,4 @@
+// Package mysql provides a MySQL check for checking the status of a MySQL database connection
 package mysql
 
 import (
@@ -7,7 +8,7 @@ import (
 
 	"github.com/spf13/viper"
 
-	// MyLSQL driver
+	// MySQL driver
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -19,7 +20,7 @@ func Check(v *viper.Viper) error {
 	pass := v.GetString("Pass")
 
 	if ep == "" {
-		return errors.New("No endpoint set")
+		return errors.New("no endpoint set")
 	}
 
 	connString := fmt.Sprintf("%s:%s@tcp(%s)/", user, pass, ep)
@@ -29,7 +30,7 @@ func Check(v *viper.Viper) error {
 		return err
 	}
 
-	defer db.Close()
+	defer func() { _ = db.Close() }()
 
 	// make sure connection is available
 	if err := db.Ping(); err != nil {
