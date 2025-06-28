@@ -58,7 +58,8 @@ func initConfig() {
 		viper.SetConfigName("utproxy")
 	}
 
-	viper.AutomaticEnv() // read in environment variables that match
+	// read in environment variables that match
+	viper.AutomaticEnv()
 
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err != nil {
@@ -78,5 +79,6 @@ func initConfig() {
 
 	app.LogRequestsTo = viper.GetString("Log")
 
-	viper.WatchConfig() // reload config on change
+	// reload config on change
+	viper.WatchConfig()
 }

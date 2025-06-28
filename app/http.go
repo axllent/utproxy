@@ -16,7 +16,7 @@ import (
 )
 
 var (
-	// LogRequestsTo variable - if set then logfile is written
+	// LogRequestsTo variable - if set then this log file is written to
 	LogRequestsTo string
 
 	m sync.Mutex

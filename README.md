@@ -19,7 +19,7 @@ listen: 0.0.0.0:3500 # interface and port to listen on
 
 If both `sslcert` and `sslkey` are set, then UTProxy should be accessed via `https://`, otherwise `http://`. In this example we would be accessing the proxy via `http://example.com:3500`. UTProxy does not register or renew SSL certificates, so the service should be restarted manually if you update the certificates.
 
-And then secondly the services you wish to test. Each service is added as a array to the `services:` section.
+And then secondly the services you wish to test. Each service is added as an array to the `services:` section.
 
 ```yaml
 services:
@@ -118,7 +118,7 @@ You need to set up your uptime monitors to monitor the HTTP status of each of yo
 
 `http://example.com:3500/intranet`, `http://example.com:3500/smtp`, `http://example.com:3500/database`, `http://example.com:3500/printer` etc
 
-Checks should return a `200` status, else they are failing.
+Checks should return a `200` status, otherwise they are considered failing.
 
 ## Running as a systemd service
 

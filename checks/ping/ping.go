@@ -24,7 +24,7 @@ func Check(v *viper.Viper) error {
 		return err
 	}
 
-	// required for Windows
+	// Required for Windows compatibility
 	if runtime.GOOS == "windows" {
 		pinger.SetPrivileged(true)
 	}
@@ -32,8 +32,8 @@ func Check(v *viper.Viper) error {
 	pinger.Count = 1
 	pinger.Timeout = time.Second
 
-	err = pinger.Run() // Blocks until finished.
-	if err != nil {
+	// Blocks until finished.
+	if err := pinger.Run(); err != nil {
 		return err
 	}
 

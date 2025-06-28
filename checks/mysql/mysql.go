@@ -8,7 +8,7 @@ import (
 
 	"github.com/spf13/viper"
 
-	// MyLSQL driver
+	// MySQL driver
 	_ "github.com/go-sql-driver/mysql"
 )
 
