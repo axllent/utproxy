@@ -3,7 +3,7 @@ module github.com/axllent/utproxy
 go 1.23.0
 
 require (
-	github.com/axllent/ghru/v2 v2.0.1
+	github.com/axllent/ghru/v2 v2.0.2
 	github.com/go-sql-driver/mysql v1.9.3
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/prometheus-community/pro-bing v0.7.0
