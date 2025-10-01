@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.1]
+
+- Update Go dependencies
+- Update CI workflows
+
 ## [1.1.0]
 
 - Switch to ghru/v2 for application updates
