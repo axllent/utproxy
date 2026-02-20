@@ -4,6 +4,7 @@ package http
 import (
 	"errors"
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"strings"
@@ -49,6 +50,10 @@ func Check(v *viper.Viper) error {
 	if err != nil {
 		return err
 	}
+	defer func() { _ = resp.Body.Close() }()
+
+	// Drain and discard the response body to properly close the connection
+	_, _ = io.Copy(io.Discard, resp.Body)
 
 	if resp.StatusCode != expectedCode {
 		return fmt.Errorf("expected status %d, received %d", expectedCode, resp.StatusCode)
