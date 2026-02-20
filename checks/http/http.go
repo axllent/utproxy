@@ -16,6 +16,9 @@ import (
 var (
 	// UserAgent default
 	UserAgent = "Go Up Checker"
+
+	// MaxResponseSize limits response body reading to 1MB
+	MaxResponseSize int64 = 1024 * 1024 // 1MB
 )
 
 // Check returns a test
@@ -52,8 +55,8 @@ func Check(v *viper.Viper) error {
 	}
 	defer func() { _ = resp.Body.Close() }()
 
-	// Drain and discard the response body to properly close the connection
-	_, _ = io.Copy(io.Discard, resp.Body)
+	// Drain and discard the response body (limited to MaxResponseSize) to properly close the connection
+	_, _ = io.Copy(io.Discard, io.LimitReader(resp.Body, MaxResponseSize))
 
 	if resp.StatusCode != expectedCode {
 		return fmt.Errorf("expected status %d, received %d", expectedCode, resp.StatusCode)
