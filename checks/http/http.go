@@ -67,10 +67,10 @@ func Check(v *viper.Viper) error {
 var DefaultHTTPClient = &http.Client{
 	Transport: &http.Transport{
 		Proxy: http.ProxyFromEnvironment,
-		Dial: (&net.Dialer{
+		DialContext: (&net.Dialer{
 			Timeout:   10 * time.Second,
 			KeepAlive: 0,
-		}).Dial,
+		}).DialContext,
 		TLSHandshakeTimeout:   5 * time.Second,
 		ExpectContinueTimeout: 1 * time.Second,
 		MaxIdleConnsPerHost:   1,
@@ -78,7 +78,7 @@ var DefaultHTTPClient = &http.Client{
 		DisableKeepAlives:     true,
 		ResponseHeaderTimeout: 5 * time.Second,
 	},
-	CheckRedirect: func(req *http.Request, via []*http.Request) error {
+	CheckRedirect: func(_ *http.Request, _ []*http.Request) error {
 		return http.ErrUseLastResponse
 	},
 	Timeout: 10 * time.Second,
