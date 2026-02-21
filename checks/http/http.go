@@ -4,6 +4,7 @@ package http
 import (
 	"errors"
 	"fmt"
+	"io"
 	"net"
 	"net/http"
 	"strings"
@@ -15,6 +16,9 @@ import (
 var (
 	// UserAgent default
 	UserAgent = "Go Up Checker"
+
+	// MaxResponseSize limits response body reading to 1MB
+	MaxResponseSize int64 = 1024 * 1024 // 1MB
 )
 
 // Check returns a test
@@ -49,6 +53,10 @@ func Check(v *viper.Viper) error {
 	if err != nil {
 		return err
 	}
+	defer func() { _ = resp.Body.Close() }()
+
+	// Drain and discard the response body (limited to MaxResponseSize) to properly close the connection
+	_, _ = io.Copy(io.Discard, io.LimitReader(resp.Body, MaxResponseSize))
 
 	if resp.StatusCode != expectedCode {
 		return fmt.Errorf("expected status %d, received %d", expectedCode, resp.StatusCode)
@@ -62,10 +70,10 @@ func Check(v *viper.Viper) error {
 var DefaultHTTPClient = &http.Client{
 	Transport: &http.Transport{
 		Proxy: http.ProxyFromEnvironment,
-		Dial: (&net.Dialer{
+		DialContext: (&net.Dialer{
 			Timeout:   10 * time.Second,
 			KeepAlive: 0,
-		}).Dial,
+		}).DialContext,
 		TLSHandshakeTimeout:   5 * time.Second,
 		ExpectContinueTimeout: 1 * time.Second,
 		MaxIdleConnsPerHost:   1,
@@ -73,7 +81,7 @@ var DefaultHTTPClient = &http.Client{
 		DisableKeepAlives:     true,
 		ResponseHeaderTimeout: 5 * time.Second,
 	},
-	CheckRedirect: func(req *http.Request, via []*http.Request) error {
+	CheckRedirect: func(_ *http.Request, _ []*http.Request) error {
 		return http.ErrUseLastResponse
 	},
 	Timeout: 10 * time.Second,

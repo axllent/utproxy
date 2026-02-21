@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.2]
+
+- Update Go dependencies
+- Enhance HTTP check by limiting response body reading to MaxResponseSize for better resource management
+- Refactor HTTP client configuration to use DialContext for improved compatibility
+
 ## [1.1.1]
 
 - Update Go dependencies
